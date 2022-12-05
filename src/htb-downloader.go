@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"regexp"
 
-	"github.com/cavaliercoder/grab/v3"
+	"github.com/cavaliergopher/grab/v3"
 	"github.com/gocolly/colly/v2"
 )
 
@@ -17,16 +18,12 @@ func main() {
 		src = e.Attr("src")
 		isTrue, _ = regexp.MatchString("https://www.hackthebox.com/storage/avatars/[[:ascii:]]+.png", src)
 		if isTrue && isTrueOneTime {
-			// fmt.Printf(src)
-			donwloadedAvatar, _ := grab.Get(".", src)
+			avatar, _ := grab.Get(os.Args[2], src)
 			isTrueOneTime = false
-			fmt.Println(donwloadedAvatar)
+			fmt.Printf("downloaded as %s at %s\n", avatar.Filename, os.Args[2])
 		}
-		// fmt.Println(src)
 	})
-	c.Visit("https://www.hackthebox.com/machines/steamcloud")
-	// fmt.Println(src)
+	url := fmt.Sprintf("https://www.hackthebox.com/machines/%s", os.Args[1])
+	c.Visit(url)
 
-	// match, _ := regexp.MatchString("peach", "p([a-z]+)ch")
-	// fmt.Println(match)
 }
