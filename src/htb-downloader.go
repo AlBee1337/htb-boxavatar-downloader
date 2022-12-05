@@ -20,7 +20,7 @@ func main() {
 		if isTrue && isTrueOneTime {
 			avatar, _ := grab.Get(os.Args[2], src)
 			isTrueOneTime = false
-			fmt.Printf("downloaded as %s at %s\n", avatar.Filename, os.Args[2])
+			fmt.Printf("downloaded at %s\n", avatar.Filename)
 		}
 	})
 	url := fmt.Sprintf("https://www.hackthebox.com/machines/%s", os.Args[1])
